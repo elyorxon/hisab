@@ -95,6 +95,12 @@ class Order(models.Model):
         ('yetkazildi', 'Yetkazildi'),
         ('bekor qilindi', 'Bekor qilindi'),
     ]
+    CURRENCY_TYPE_CHOICES = [
+        ('USD', 'US Dollar'),
+        ('UZS', 'Uzbekistan Sum'),
+        ('RUB', 'Russian Ruble'),
+    ]
+    currency_type = models.CharField(max_length=3, choices=CURRENCY_TYPE_CHOICES)
     order_number = models.CharField(max_length=255, primary_key=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     date = models.DateField()
@@ -111,6 +117,42 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
+
+
+class Expenses(models.Model):
+    expanse_name = models.CharField(max_length=255)
+    purpose = models.TextField()
+    payment_quantity = models.DecimalField(max_digits=10, decimal_places=2)
+    CURRENCY_TYPE_CHOICES = [
+        ('USD', 'US Dollar'),
+        ('UZS', 'Uzbekistan Sum'),
+        ('RUB', 'Russian Ruble'),
+    ]
+    currency_type = models.CharField(max_length=3, choices=CURRENCY_TYPE_CHOICES)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.expanse_name
+
+
+class Transaction(models.Model):
+    CURRENCY_TYPE_CHOICES = [
+        ('USD', 'US Dollar'),
+        ('UZS', 'Uzbekistan Sum'),
+        ('RUB', 'Russian Ruble'),
+    ]
+
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='transactions')
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    date = models.DateField()
+    status = models.CharField(max_length=255)
+    payment_method = models.ForeignKey(PaymentMethod, on_delete=models.CASCADE, related_name='transactions')
+    currency_type = models.CharField(max_length=3, choices=CURRENCY_TYPE_CHOICES)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
 
 
 
