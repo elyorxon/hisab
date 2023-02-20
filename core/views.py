@@ -6,13 +6,13 @@ from .forms import ProductForm
 
 
 def homepage(request):
-    return render(request=request, template_name="main/index.html")
+    return render(request=request, template_name="core/index.html")
 
 
 class ProductCreateView(CreateView):
     model = Product
     form_class = ProductForm
-    template_name = 'product_form.html'
+    template_name = 'core/product_form.html'
     success_url = reverse_lazy('product_list')
 
 
