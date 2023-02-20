@@ -444,31 +444,29 @@
                             </svg></div>
                         <ul class="side-menu">
                             <li class="sub-category">
-                                <h3>Main</h3>
+                                <h3>Asosiy sahifa</h3>
                             </li>
                             <li class="slide">
                                 <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html"><i
                                         class="side-menu__icon fe fe-home"></i><span
                                         class="side-menu__label">Hisobot paneli</span></a>
                             </li>
-<!--                            <li class="sub-category">-->
-<!--                               <h3>UI Kit</h3>-->
-<!--                            </li> -->
+
                             <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
                                         class="side-menu__icon fe fe-slack"></i><span
-                                        class="side-menu__label">Apps</span><i
+                                        class="side-menu__label">Omborni boshqarish</span><i
                                         class="angle fe fe-chevron-right"></i></a>
                                 <ul class="slide-menu">
-                                    <li class="side-menu-label1"><a href="javascript:void(0)">Apps</a></li>
-                                    <li><a href="cards.html" class="slide-item"> Cards design</a></li>
-                                    <li><a href="calendar.html" class="slide-item"> Default calendar</a></li>
-                                    <li><a href="calendar2.html" class="slide-item"> Full calendar</a></li>
-                                    <li><a href="chat.html" class="slide-item"> Chat</a></li>
-                                    <li><a href="notify.html" class="slide-item"> Notifications</a></li>
-                                    <li><a href="sweetalert.html" class="slide-item"> Sweet alerts</a></li>
-                                    <li><a href="rangeslider.html" class="slide-item"> Range slider</a></li>
-                                    <li><a href="scroll.html" class="slide-item"> Content Scroll bar</a></li>
+                                    <li class="side-menu-label1"><a href="javascript:void(0)">Omborni boshqarish</a></li>
+                                    <li><a href="{% url 'core/add_product.html' %}" class="slide-item">Tovar qo'shish</a></li>
+                                    <li><a href="{% url 'core/product_list.html' %}" class="slide-item">Tovarlar ro'yxati</a></li>
+                                    <li><a href="{% url 'core/add_kirim.html' %}" class="slide-item">Kirim qo'shish</a></li>
+                                    <li><a href="{% url 'core/kirim_list.html' %}" class="slide-item">Kirimlar ro'yxati</a></li>
+                                    <li><a href="{% url 'core/add_chiqim.html' %}" class="slide-item">Chiqim kiritish</a></li>
+                                    <li><a href="{% url 'core/chiqim_list.html' %}" class="slide-item">Chiqimlar ro'yxati</a></li>
+                                    <li><a href="{% url 'core/add_expense.html' %}" class="slide-item">Xarajat kiritish</a></li>
+                                    <li><a href="{% url 'core/expense_list.html' %}" class="slide-item">Xarajatlar ro'yxati</a></li>
                                     <li><a href="loaders.html" class="slide-item"> Loaders</a></li>
                                     <li><a href="counters.html" class="slide-item"> Counters</a></li>
                                     <li><a href="rating.html" class="slide-item"> Rating</a></li>
