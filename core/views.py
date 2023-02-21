@@ -1,8 +1,9 @@
+from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.shortcuts import render, redirect
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
-from .models import Product
+
 from .forms import ProductForm
+from .models import Product
 
 
 def homepage(request):

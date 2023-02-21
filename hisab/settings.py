@@ -63,7 +63,7 @@ ROOT_URLCONF = 'hisab.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'core', 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'core', 'templates/core')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
