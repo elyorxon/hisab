@@ -11,35 +11,33 @@ class Product(models.Model):
         ('quti', "Yashik,Qadoq")
 
     ]
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    cost_price = models.DecimalField(max_digits=10, decimal_places=2)
-    selling_price = models.DecimalField(max_digits=10, decimal_places=2)
-    quantity = models.IntegerField()
-    unit = models.CharField(choices=UNIT_CHOICES, max_length=20)
-    category = models.CharField(max_length=255)
-    supplier = models.CharField(max_length=255)
-    products_per_box = models.IntegerField(blank=True, null=True)
+    nomi = models.CharField(max_length=255)
+    tavsifi = models.TextField()
+    tannarxi = models.DecimalField(max_digits=10, decimal_places=2)
+    sotilish_narxi = models.DecimalField(max_digits=10, decimal_places=2)
+    miqdori = models.PositiveIntegerField()
+    ulchov_birligi = models.CharField(choices=UNIT_CHOICES, max_length=20)
+    kategoriyasi = models.CharField(max_length=255)
+    taminotchi = models.CharField(max_length=255)
+    qutidagi_tovar_soni = models.PositiveIntegerField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
 
     def __str__(self):
-        return self.name
+        return self.nomi
 
 
 
 class Supplier(models.Model):
-    name = models.CharField(max_length=255)
-    address = models.TextField()
-    phone_number = models.CharField(max_length=255)
+    nomi = models.CharField(max_length=255)
+    manzili = models.TextField()
+    telefon_raqami = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
-
-
 class Warehouse(models.Model):
     name = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
