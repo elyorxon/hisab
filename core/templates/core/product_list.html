@@ -61,12 +61,13 @@
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
+                                                                            {% for product in object_list %}
                                                                             <tr class="border-bottom">
                                                                                 <td class="text-center">
                                                                                     <div class="mt-0 mt-sm-2 d-block">
                                                                                         <h6
                                                                                             class="mb-0 fs-14 fw-semibold">
-                                                                                            "Tafsiri Hilol"</h6>
+                                                                                            {{ product.nomi }}</h6>
                                                                                     </div>
                                                                                 </td>
                                                                                 <td>
@@ -75,7 +76,7 @@
                                                                                         <div class="ms-3 mt-0 mt-sm-2 d-block">
                                                                                             <h6
                                                                                                 class="mb-0 fs-14 fw-semibold">
-                                                                                                Diniy kitoblar</h6>
+                                                                                                {{ product.tannarxi }}</h6>
                                                                                         </div>
                                                                                     </div>
                                                                                 </td>
@@ -85,15 +86,15 @@
                                                                                             class="mt-0 mt-sm-3 d-block">
                                                                                             <h6
                                                                                                 class="mb-0 fs-14 fw-semibold">
-                                                                                                500000</h6>
+                                                                                                {{ product.kategoriyasi }}</h6>
                                                                                         </div>
                                                                                     </div>
                                                                                 </td>
                                                                                 <td><span class="mt-sm-2 d-block">
-                                                                                    99
+                                                                                    {{ product.sotilish_narxi }}
                                                                                 </span></td>
                                                                                 <td><span
-                                                                                        class="fw-semibold mt-sm-2 d-block">Dona</span>
+                                                                                        class="fw-semibold mt-sm-2 d-block">{{ product.miqdori }}</span>
                                                                                 </td>
                                                                                 <td>
                                                                                     <div class="d-flex">
@@ -101,7 +102,7 @@
                                                                                             class="mt-0 mt-sm-3 d-block">
                                                                                             <h6
                                                                                                 class="mb-0 fs-14 fw-semibold">
-                                                                                                Hilol Nashr</h6>
+                                                                                                {{ product.ulchov_birligi }}</h6>
                                                                                         </div>
                                                                                     </div>
                                                                                 </td>
@@ -124,7 +125,7 @@
                                                                                     </div>
                                                                                 </td>
                                                                             </tr>
-
+                                                                             {% endfor %}
                                                                         </thead>
                                                                         <tbody>
 
