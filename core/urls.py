@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import ProductCreateView, ProductUpdateView, ProductDeleteView, ProductListView, homepage
+from .views import ProductCreateView, ProductUpdateView, ProductDeleteView, ProductListView,\
+    ExpenseCreateView, ExpenseUpdateView, ExpenseDeleteView, ExpenseListView, homepage
 
 
 app_name = "core"

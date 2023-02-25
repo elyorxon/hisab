@@ -4,6 +4,14 @@
 {% load crispy_forms_tags %}
 {% load i18n %}
 {% block content %}
-
+<div class="card-body">
+    <h5>Xarajatlarni tahrirlash</h5>
+    <form method="post">
+        {% csrf_token %}
+         {{ form|crispy }}
+        <a type="button" class="btn btn-danger" href="{%url 'core:expense_list' %}">Bekor qilish</a>
+        <button type="submit" class="btn btn-success">Yangilash</button>
+    </form>
+</div>
 
 {% endblock %}
