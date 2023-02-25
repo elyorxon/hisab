@@ -34,3 +34,29 @@ class ProductListView(ListView):
     model = Product
     template_name = 'core/product_list.html'
     context_object_name = 'products'
+
+
+class ExpenseCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'core/expense_add.html'
+    success_url = reverse_lazy('core:expense_list')
+
+
+class ExpenseUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'core/expense_update.html'
+    success_url = reverse_lazy('core:expense_list')
+
+
+class ExpenseDeleteView(DeleteView):
+    model = Product
+    template_name = 'core/expense_delete.html'
+    success_url = reverse_lazy('core:expense_list')
+
+
+class ExpenseListView(ListView):
+    model = Product
+    template_name = 'core/product_list.html'
+    context_object_name = 'products'
