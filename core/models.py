@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Product(models.Model):
@@ -113,20 +114,26 @@ class OrderItem(models.Model):
 
 
 class Expenses(models.Model):
-    expanse_name = models.CharField(max_length=255)
-    purpose = models.TextField()
-    payment_quantity = models.DecimalField(max_digits=10, decimal_places=2)
+    xarajat_nomi = models.CharField(max_length=255)
+    maqsadi = models.TextField()
+    miqdori = models.DecimalField(max_digits=10, decimal_places=2)
     CURRENCY_TYPE_CHOICES = [
         ('USD', 'US Dollar'),
         ('UZS', 'Uzbekistan Sum'),
         ('RUB', 'Russian Ruble'),
     ]
-    currency_type = models.CharField(max_length=3, choices=CURRENCY_TYPE_CHOICES)
+    valyuta_turi = models.CharField(max_length=3, choices=CURRENCY_TYPE_CHOICES)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name_plural = "Xarajatlar"
+
     def __str__(self):
-        return self.expanse_name
+        return self.xarajat_nomi
+
+    def get_absolute_url(self):
+        return reverse('expense_detail', args=[str(self.id)])
 
 
 class Transaction(models.Model):

@@ -6,8 +6,9 @@
     <form method="post">
         {% csrf_token %}
         <p> <strong>{{ object.nomi }} </strong> ni ro'yxatdan o'chirishni istaysizmi? </p>
-        <button type="submit" class="btn btn-danger">O'chirish</button>
-        <a type="button" class="btn btn-success" href="{%url 'core:product_list' %}">Bekor qilish</a>
+        <button type="submit" class="btn btn-danger">O'chirish<span class="fe fe-trash-2 fs-14"></span></button>
+        <a type="button" class="btn btn-success" href="{%url 'core:product_list' %}">Bekor qilish
+        </a>
     </form>
 </div>
 {% endblock %}
