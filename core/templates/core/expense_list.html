@@ -5,8 +5,9 @@
 {% load i18n %}
 {% block content %}
 
-                        <div class="row mt-5">
-                            <div class="col-12 col-sm-12">
+
+<div class="row mt-5">
+    <div class="col-12 col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title mb-0">Xarajatlar ro'yxati</h3>
@@ -40,23 +41,20 @@
                                                                         <thead class="border-top">
                                                                             <tr>
 
-                                                                                <th
-                                                                                    class="bg-transparent border-bottom-0">
-                                                                                    Tovar nomi</th>
+
                                                                                 <th class="bg-transparent border-bottom-0"
                                                                                     style="width: 15%;">Xarajat nomi</th>
                                                                                 <th
                                                                                     class="bg-transparent border-bottom-0">
                                                                                     Xarajat maqsadi</th>
+
                                                                                 <th
                                                                                     class="bg-transparent border-bottom-0">
-                                                                                    Xarajat miqdori</th>
+                                                                                   Xarajat miqdori</th>
                                                                                 <th
                                                                                     class="bg-transparent border-bottom-0">
                                                                                     Valyuta turi</th>
 
-                                                                                <th class="bg-transparent border-bottom-0"
-                                                                                    style="width: 10%;">O'chirish</th>
                                                                                 <th class="bg-transparent border-bottom-0"
                                                                                     style="width: 5%;">O'zgartirish</th>
                                                                             </tr>
@@ -64,22 +62,18 @@
                                                                         <tbody>
                                                                             {% for expense in object_list %}
                                                                             <tr class="border-bottom">
-                                                                                <td class="text-center">
-                                                                                    <div class="mt-0 mt-sm-2 d-block">
-                                                                                        <h6
-                                                                                            class="mb-0 fs-14 fw-semibold">
-                                                                                            {{ expense.xarajat_nomi }}</h6>
+
+                                                                                <td><span class="mt-sm-2 d-block">
+                                                                                    {{ expense.xarajat_nomi }}
+                                                                                </span></td>
+                                                                                <td>
+                                                                                    <div class="mt-sm-1 d-block">
+                                                                                        <span
+                                                                                            class="badge bg-success-transparent rounded-pill text-success p-2 px-3">{{ expense.maqsadi }}</span>
                                                                                     </div>
                                                                                 </td>
-                                                                                <td>
-                                                                                    <div class="d-flex">
-
-                                                                                        <div class="ms-3 mt-0 mt-sm-2 d-block">
-                                                                                            <h6
-                                                                                                class="mb-0 fs-14 fw-semibold">
-                                                                                                {{ expense.xarajat_maqsadi }}</h6>
-                                                                                        </div>
-                                                                                    </div>
+                                                                                <td><span
+                                                                                        class="fw-semibold mt-sm-2 d-block">{{ expense.miqdori }}</span>
                                                                                 </td>
                                                                                 <td>
                                                                                     <div class="d-flex">
@@ -87,21 +81,19 @@
                                                                                             class="mt-0 mt-sm-3 d-block">
                                                                                             <h6
                                                                                                 class="mb-0 fs-14 fw-semibold">
-                                                                                                 {{ expense.xarajat_miqdori }}</h6>
+                                                                                                {{ expense.valyuta_turi }}</h6>
                                                                                         </div>
                                                                                     </div>
                                                                                 </td>
-                                                                                <td><span class="mt-sm-2 d-block">
-                                                                                    {{ expense.valyuta_turi }}
-                                                                                </span></td>
 
+                                                                                <td>
                                                                                     <div class="g-2">
-                                                                                        <a href="{% url 'core:product_update' pk=product.pk%}"
+                                                                                        <a href="{% url 'core:expense_update' pk=expense.pk%}"
                                                                                           class="btn text-primary btn-sm"
                                                                                             data-bs-toggle="tooltip"
                                                                                             data-bs-original-title="Tahrirlash"><span
                                                                                                 class="fe fe-edit fs-14"></span></a>
-                                                                                        <a href="{% url 'core:product_delete' pk=product.pk%}"
+                                                                                        <a href="{% url 'core:expense_delete' pk=expense.pk%}"
                                                                                            class="btn text-danger btn-sm"
                                                                                             data-bs-toggle="tooltip"
                                                                                             data-bs-original-title="O'chirish"><span
@@ -126,8 +118,10 @@
                                 </div>
                             </div>
                         </div>
+
                         <!-- ROW-4 END -->
-                    </div>
+</div>
                     <!-- CONTAINER END -->
+
 
 {% endblock %}

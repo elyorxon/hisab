@@ -5,5 +5,22 @@
 {% load i18n %}
 {% block content %}
 
-
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="card">
+          <div class="card-header">
+            <h3>Xarajat kiritish</h3>
+          </div>
+          <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form|crispy }}
+              <button type="submit" class="btn btn-primary mt-3">Xarajat kiritish</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
