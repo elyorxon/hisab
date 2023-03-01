@@ -38,7 +38,16 @@ class Supplier(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return self.nomi
+
+
+class Kirim(models.Model):
+    miqdori = models.PositiveIntegerField(max_length=15)
+    sanasi = models.DateTimeField()
+
+
+
+
 class Warehouse(models.Model):
     name = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
