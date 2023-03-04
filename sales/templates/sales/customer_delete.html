@@ -1,0 +1,14 @@
+{% extends "core/index.html" %}
+
+{% block content %}
+<div class="card-body">
+    <h5>Mijozni o'chirish</h5>
+    <form method="post">
+        {% csrf_token %}
+        <p> <strong>{{ object.nomi }} </strong> ni ro'yxatdan o'chirishni istaysizmi? </p>
+        <button type="submit" class="btn btn-danger">O'chirish<span class="fe fe-trash-2 fs-14"></span></button>
+        <a type="button" class="btn btn-success" href="{%url 'sales:customer_list' %}">Bekor qilish
+        </a>
+    </form>
+</div>
+{% endblock %}
