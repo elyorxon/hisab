@@ -72,48 +72,6 @@ class Stock(models.Model):
         return self.product
 
 
-
-
-
-
-class Order(models.Model):
-    ORDER_TYPE_CHOICES = [
-        ('dona', 'Chakana'),
-        ('ulgurji', 'Ulgurji'),
-    ]
-    ORDER_STATUS_CHOICES = [
-        ('kutilyapti', 'Kutilyapti'),
-        ('tasdiqlandi', 'Tasdiqlandi'),
-        ('yetkazildi', 'Yetkazildi'),
-        ('bekor qilindi', 'Bekor qilindi'),
-    ]
-    CURRENCY_TYPE_CHOICES = [
-        ('USD', 'US Dollar'),
-        ('UZS', 'Uzbekistan Sum'),
-        ('RUB', 'Russian Ruble'),
-    ]
-    currency_type = models.CharField(max_length=3, choices=CURRENCY_TYPE_CHOICES)
-    order_number = models.CharField(max_length=255, primary_key=True)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    date = models.DateField()
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    types = models.CharField(max_length=255, choices=ORDER_TYPE_CHOICES)
-    status = models.CharField(max_length=255, choices=ORDER_STATUS_CHOICES)
-
-
-
-
-
-class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-
-    def price(self):
-        return self.product.selling_price
-
-
-
 class Expenses(models.Model):
     xarajat_nomi = models.CharField(max_length=255)
     maqsadi = models.TextField()
@@ -137,39 +95,39 @@ class Expenses(models.Model):
         return reverse('expense_detail', args=[str(self.id)])
 
 
-class Transaction(models.Model):
-    CURRENCY_TYPE_CHOICES = [
-        ('USD', 'US Dollar'),
-        ('UZS', 'Uzbekistan Sum'),
-        ('RUB', 'Russian Ruble'),
-    ]
-    PAYMENT_CHOICE = [
-        ("Naqd", "Naqd"),
-        ("Pul o'tkazish", "Pul o'tkazish yo'li bilan")
-    ]
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='transactions')
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    date = models.DateField()
-    status = models.CharField(max_length=255)
-    payment_method = models.CharField(max_length=14, choices=PAYMENT_CHOICE)
-    currency_type = models.CharField(max_length=3, choices=CURRENCY_TYPE_CHOICES)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+# class Transaction(models.Model):
+#     CURRENCY_TYPE_CHOICES = [
+#         ('USD', 'US Dollar'),
+#         ('UZS', 'Uzbekistan Sum'),
+#         ('RUB', 'Russian Ruble'),
+#     ]
+#     PAYMENT_CHOICE = [
+#         ("Naqd", "Naqd"),
+#         ("Pul o'tkazish", "Pul o'tkazish yo'li bilan")
+#     ]
+#     order = models.ForeignKey(Order, on_delete=models.CASCADE)
+#     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='transactions')
+#     amount = models.DecimalField(max_digits=10, decimal_places=2)
+#     date = models.DateField()
+#     status = models.CharField(max_length=255)
+#     payment_method = models.CharField(max_length=14, choices=PAYMENT_CHOICE)
+#     currency_type = models.CharField(max_length=3, choices=CURRENCY_TYPE_CHOICES)
+#     created = models.DateTimeField(auto_now_add=True)
+#     updated = models.DateTimeField(auto_now=True)
 
 
 
-
-class SalesReport(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True, related_name='sales_reports')
-    order_item = models.ForeignKey(OrderItem, on_delete=models.SET_NULL, blank=True, null=True, related_name='sales_reports')
-    start_date = models.DateField()
-    end_date = models.DateField()
-    total_sales = models.DecimalField(max_digits=10, decimal_places=2)
-    total_profit = models.DecimalField(max_digits=10, decimal_places=2)
-    total_customers = models.IntegerField()
-    total_items_sold = models.IntegerField()
-    top_selling_products = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+#
+# class SalesReport(models.Model):
+#     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True, related_name='sales_reports')
+#     order_item = models.ForeignKey(OrderItem, on_delete=models.SET_NULL, blank=True, null=True, related_name='sales_reports')
+#     start_date = models.DateField()
+#     end_date = models.DateField()
+#     total_sales = models.DecimalField(max_digits=10, decimal_places=2)
+#     total_profit = models.DecimalField(max_digits=10, decimal_places=2)
+#     total_customers = models.IntegerField()
+#     total_items_sold = models.IntegerField()
+#     top_selling_products = models.TextField()
+#     created_at = models.DateTimeField(auto_now_add=True)
 
 
