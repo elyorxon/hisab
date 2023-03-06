@@ -29,22 +29,22 @@ class Order(models.Model):
         ('UZS', 'Uzbekistan Sum'),
         ('RUB', 'Russian Ruble'),
     ]
-    currency_type = models.CharField(max_length=3, choices=CURRENCY_TYPE_CHOICES)
-    order_number = models.CharField(max_length=255, primary_key=True)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    date = models.DateField()
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    types = models.CharField(max_length=255, choices=ORDER_TYPE_CHOICES)
-    status = models.CharField(max_length=255, choices=ORDER_STATUS_CHOICES)
+    valyuta_turi = models.CharField(max_length=3, choices=CURRENCY_TYPE_CHOICES)
+    buyurtma_raqami = models.CharField(max_length=255, primary_key=True)
+    mijoz = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    sana = models.DateField()
+    buyurtma_miqdori = models.PositiveIntegerField(max_length=16)
+    buyurtma_turi = models.CharField(max_length=255, choices=ORDER_TYPE_CHOICES)
+    buyurtma_holati = models.CharField(max_length=255, choices=ORDER_STATUS_CHOICES)
 
 
 
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
+    buyurtma = models.ForeignKey(Order, on_delete=models.CASCADE)
+    tovar = models.ForeignKey(Product, on_delete=models.CASCADE)
+    miqdor = models.PositiveIntegerField()
 
     def price(self):
-        return self.product.selling_price
+        return self.product.sotilish_narxi
