@@ -54,4 +54,22 @@ class OrderForm(forms.ModelForm):
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Buyurtma qo\'shish'))
 
+        self.helper.layout = Layout(
+            Row(
+                Column('valyuta_turi', css_class='form-group col-md-6 mb-0'),
+                Column('sana', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('mijoz', css_class='form-group col-md-6 mb-0'),
+                Column('buyurtma_miqdori', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('buyurtma_turi', css_class='form-group col-md-6 mb-0'),
+                Column('buyurtma_holati', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Submit('submit', "Buyurtma qo'shish")
+        )
 

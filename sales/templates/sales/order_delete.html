@@ -5,7 +5,7 @@
     <h5>Buyurtmani o'chirish</h5>
     <form method="post">
         {% csrf_token %}
-        <p> <strong>{{ object.ismi }} </strong> ni ro'yxatdan o'chirishni istaysizmi? </p>
+        <p> <strong>{{ object. }} </strong> ni ro'yxatdan o'chirishni istaysizmi? </p>
         <button type="submit" class="btn btn-danger">O'chirish<span class="fe fe-trash-2 fs-14"></span></button>
         <a type="button" class="btn btn-warn" href="{%url 'sales:order_list' %}">Bekor qilish
         </a>

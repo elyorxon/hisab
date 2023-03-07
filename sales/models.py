@@ -30,7 +30,6 @@ class Order(models.Model):
         ('RUB', 'Russian Ruble'),
     ]
     valyuta_turi = models.CharField(max_length=3, choices=CURRENCY_TYPE_CHOICES)
-    buyurtma_raqami = models.CharField(max_length=255, primary_key=True)
     mijoz = models.ForeignKey(Customer, on_delete=models.CASCADE)
     sana = models.DateField()
     buyurtma_miqdori = models.PositiveIntegerField(max_length=16)
