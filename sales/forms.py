@@ -36,7 +36,7 @@ class CustomerForm(forms.ModelForm):
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ['valyuta_turi', 'mijoz', 'sana', 'buyurtma_miqdori', 'buyurtma_turi', 'buyurtma_holati']
+        fields = ['tovar', 'valyuta_turi', 'mijoz', 'sana', 'buyurtma_miqdori', 'buyurtma_turi', 'buyurtma_holati']
         widgets = {
             'sana': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
             'buyurtma_holati': forms.Select(attrs={'class': 'form-control'}),
@@ -52,12 +52,12 @@ class OrderForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         self.helper.form_method = 'post'
-        self.helper.add_input(Submit('submit', 'Buyurtma qo\'shish'))
 
         self.helper.layout = Layout(
             Row(
-                Column('valyuta_turi', css_class='form-group col-md-6 mb-0'),
-                Column('sana', css_class='form-group col-md-6 mb-0'),
+                Column('tovar', css_class='form-group col-md-4 mb-0'),
+                Column('valyuta_turi', css_class='form-group col-md-4 mb-0'),
+                Column('sana', css_class='form-group col-md-4 mb-0'),
                 css_class='form-row'
             ),
             Row(

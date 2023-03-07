@@ -29,21 +29,16 @@ class Order(models.Model):
         ('UZS', 'Uzbekistan Sum'),
         ('RUB', 'Russian Ruble'),
     ]
+    tovar = models.ForeignKey(Product, on_delete=models.CASCADE)
     valyuta_turi = models.CharField(max_length=3, choices=CURRENCY_TYPE_CHOICES)
     mijoz = models.ForeignKey(Customer, on_delete=models.CASCADE)
     sana = models.DateField()
-    buyurtma_miqdori = models.PositiveIntegerField(max_length=16)
+    buyurtma_miqdori = models.PositiveIntegerField(default=0)
     buyurtma_turi = models.CharField(max_length=255, choices=ORDER_TYPE_CHOICES)
     buyurtma_holati = models.CharField(max_length=255, choices=ORDER_STATUS_CHOICES)
 
 
+    def __str__(self):
+        return self.tovar
 
 
-
-class OrderItem(models.Model):
-    buyurtma = models.ForeignKey(Order, on_delete=models.CASCADE)
-    tovar = models.ForeignKey(Product, on_delete=models.CASCADE)
-    miqdor = models.PositiveIntegerField()
-
-    def price(self):
-        return self.product.sotilish_narxi

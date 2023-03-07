@@ -41,12 +41,6 @@ class Supplier(models.Model):
         return self.nomi
 
 
-class Kirim(models.Model):
-    miqdori = models.PositiveIntegerField(max_length=15)
-    sanasi = models.DateTimeField()
-
-
-
 
 class Warehouse(models.Model):
     name = models.CharField(max_length=255)

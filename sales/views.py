@@ -35,6 +35,7 @@ class CustomerListView(ListView):
     template_name = 'sales/customer_list.html'
     context_object_name = 'customers'
 
+
 class OrderCreateView(CreateView):
     model = Order
     form_class = OrderForm
