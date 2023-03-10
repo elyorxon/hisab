@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import CustomerCreateView, CustomerListView, CustomerUpdateView, CustomerDeleteView, homepage, \
-    OrderCreateView, OrderUpdateView, OrderListView, OrderDeleteView
+    OrderCreateView, OrderUpdateView, OrderListView, OrderDeleteView, PaymentCreateView, PaymentUpdateView, \
+    PaymentDeleteView, PaymentListView
 
 app_name = "sales"
 
