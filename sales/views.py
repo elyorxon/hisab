@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 
-from .forms import CustomerForm, OrderForm
-from .models import Customer, Order
+from .forms import CustomerForm, OrderForm, TransactionForm
+from .models import Customer, Order, Transaction
 
 
 def homepage(request):
@@ -61,3 +61,27 @@ class OrderListView(ListView):
     template_name = 'sales/order_list.html'
     context_object_name = 'orders'
 
+class PaymentCreateView(CreateView):
+    model = Transaction
+    form_class = TransactionForm
+    template_name = 'sales/payment_add.html'
+    success_url = reverse_lazy('sales:payment_list')
+
+
+class PaymentUpdateView(UpdateView):
+    model = Transaction
+    form_class = TransactionForm
+    template_name = 'sales/payment_update.html'
+    success_url = reverse_lazy('sales:payment_list')
+
+
+class PaymentDeleteView(DeleteView):
+    model = Customer
+    template_name = 'sales/payment_delete.html'
+    success_url = reverse_lazy('sales:payment_list')
+
+
+class PaymentListView(ListView):
+    model = Customer
+    template_name = 'sales/payment_list.html'
+    context_object_name = 'transactions'

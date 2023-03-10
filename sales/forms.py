@@ -1,5 +1,5 @@
 from django import forms
-from .models import Customer, Order
+from .models import Customer, Order, Transaction
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 
@@ -73,3 +73,36 @@ class OrderForm(forms.ModelForm):
             Submit('submit', "Buyurtma qo'shish")
         )
 
+class TransactionForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = ['buyurtma', 'mijoz', 'summa', 'sana', 'holati', 'tulov_turi', 'valyuta_turi']
+
+    def __init__(self, *args, **kwargs):
+        super(TransactionForm, self).__init__(*args, **kwargs)
+
+        # create a helper object
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+
+        # define form layout using crispy-forms layout objects
+        self.helper.layout = Layout(
+            Row(
+                Column('buyurtma', css_class='form-group col-md-6 mb-0'),
+                Column('mijoz', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('summa', css_class='form-group col-md-6 mb-0'),
+                Column('sana', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('holati', css_class='form-group col-md-4 mb-0'),
+                Column('tulov_turi', css_class='form-group col-md-4 mb-0'),
+                Column('valyuta_turi', css_class='form-group col-md-4 mb-0'),
+                css_class='form-row'
+            ),
+
+            Submit('submit', "To'lov qo'shish")
+        )
