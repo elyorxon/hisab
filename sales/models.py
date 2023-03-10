@@ -42,3 +42,28 @@ class Order(models.Model):
         return self.tovar
 
 
+class Transaction(models.Model):
+    CURRENCY_TYPE_CHOICES = [
+        ('USD', 'US Dollar'),
+        ('UZS', 'Uzbekistan Sum'),
+        ('RUB', 'Russian Ruble'),
+    ]
+    PAYMENT_CHOICE = [
+        ("Naqd", "Naqd"),
+        ("Pul o'tkazish", "Pul o'tkazish yo'li bilan"),
+
+    ]
+    PAYMENT_STATUS = [
+        ("To'liq to'landi", "To'liq to'landi"),
+        ("Qisman to'landi", "Qisman to'lanmadi"),
+        ("To'lanmadi", "Umuman to'lanmadi"),
+    ]
+    buyurtma = models.ForeignKey(Order, on_delete=models.CASCADE)
+    mijoz = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='transactions')
+    summa = models.PositiveIntegerField()
+    sana = models.DateField()
+    holati = models.CharField(max_length=20, choices=PAYMENT_STATUS)
+    tulov_turi = models.CharField(max_length=14, choices=PAYMENT_CHOICE)
+    valyuta_turi = models.CharField(max_length=3, choices=CURRENCY_TYPE_CHOICES)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)

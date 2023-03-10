@@ -6,13 +6,27 @@
                             <div class="col-12 col-sm-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title mb-0">Buyurtmalar ro'yxati</h3>
+                                        <h3 class="card-title mb-0">Qo'shilgan mahsulotlar ro'yxati</h3>
                                     </div>
                                     <div class="card-body pt-4">
                                         <div class="grid-margin">
                                             <div class="">
                                                 <div class="panel panel-primary">
-
+                                                    <div class="tab-menu-heading border-0 p-0">
+                                                        <div class="tabs-menu1">
+                                                            <!-- Tabs -->
+                                                            <ul class="nav panel-tabs product-sale">
+                                                                <li><a href="#tab5" class="active"
+                                                                        data-bs-toggle="tab">Barcha tovarlar</a></li>
+                                                                <li><a href="#tab6" data-bs-toggle="tab"
+                                                                        class="text-dark">Shipped</a></li>
+                                                                <li><a href="#tab7" data-bs-toggle="tab"
+                                                                        class="text-dark">Pending</a></li>
+                                                                <li><a href="#tab8" data-bs-toggle="tab"
+                                                                        class="text-dark">Cancelled</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
 
                                                     <div class="panel-body tabs-menu-body border-0 pt-0">
                                                         <div class="tab-content">
@@ -27,33 +41,33 @@
                                                                                     class="bg-transparent border-bottom-0">
                                                                                     Tovar nomi</th>
                                                                                 <th class="bg-transparent border-bottom-0"
-                                                                                    style="width: 5%;">Valyuta turi</th>
+                                                                                    style="width: 5%;">Tannarxi</th>
                                                                                 <th
                                                                                     class="bg-transparent border-bottom-0">
-                                                                                    Mijoz ismi</th>
+                                                                                    Kategoriya</th>
                                                                                 <th
                                                                                     class="bg-transparent border-bottom-0">
-                                                                                    Sana</th>
+                                                                                    Sotilish narxi</th>
                                                                                 <th
                                                                                     class="bg-transparent border-bottom-0">
-                                                                                    Buyurtma miqdori</th>
+                                                                                    Miqdori</th>
                                                                                 <th
                                                                                     class="bg-transparent border-bottom-0">
-                                                                                    Buyurtma turi</th>
+                                                                                    O'lchov birligi</th>
                                                                                 <th class="bg-transparent border-bottom-0"
-                                                                                    style="width: 10%;">Buyurtma holati</th>
+                                                                                    style="width: 10%;">Ta'minotchi</th>
                                                                                 <th class="bg-transparent border-bottom-0"
                                                                                     style="width: 5%;">O'zgartirish</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                            {% for order in object_list %}
+                                                                            {% for product in object_list %}
                                                                             <tr class="border-bottom">
                                                                                 <td class="text-center">
                                                                                     <div class="mt-0 mt-sm-2 d-block">
                                                                                         <h6
                                                                                             class="mb-0 fs-14 fw-semibold">
-                                                                                            {{ order.tovar }}</h6>
+                                                                                            {{ product.nomi }}</h6>
                                                                                     </div>
                                                                                 </td>
                                                                                 <td>
@@ -62,7 +76,7 @@
                                                                                         <div class="ms-3 mt-0 mt-sm-2 d-block">
                                                                                             <h6
                                                                                                 class="mb-0 fs-14 fw-semibold">
-                                                                                                {{ order.valyuta_turi }}</h6>
+                                                                                                {{ product.tannarxi }}</h6>
                                                                                         </div>
                                                                                     </div>
                                                                                 </td>
@@ -72,15 +86,15 @@
                                                                                             class="mt-0 mt-sm-3 d-block">
                                                                                             <h6
                                                                                                 class="mb-0 fs-14 fw-semibold">
-                                                                                                {{ order.sana }}</h6>
+                                                                                                {{ product.kategoriyasi }}</h6>
                                                                                         </div>
                                                                                     </div>
                                                                                 </td>
                                                                                 <td><span class="mt-sm-2 d-block">
-                                                                                    {{ order.mijoz }}
+                                                                                    {{ product.sotilish_narxi }}
                                                                                 </span></td>
                                                                                 <td><span
-                                                                                        class="fw-semibold mt-sm-2 d-block">{{order.buyurtma_miqdori  }}</span>
+                                                                                        class="fw-semibold mt-sm-2 d-block">{{ product.miqdori }}</span>
                                                                                 </td>
                                                                                 <td>
                                                                                     <div class="d-flex">
@@ -88,24 +102,24 @@
                                                                                             class="mt-0 mt-sm-3 d-block">
                                                                                             <h6
                                                                                                 class="mb-0 fs-14 fw-semibold">
-                                                                                                {{ order.buyurtma_turi }}</h6>
+                                                                                                {{ product.ulchov_birligi }}</h6>
                                                                                         </div>
                                                                                     </div>
                                                                                 </td>
                                                                                 <td>
                                                                                     <div class="mt-sm-1 d-block">
                                                                                         <span
-                                                                                            class="badge bg-success-transparent rounded-pill text-success p-2 px-3">{{ order.buyurtma_holati }}</span>
+                                                                                            class="badge bg-success-transparent rounded-pill text-success p-2 px-3">{{ product.taminotchi }}</span>
                                                                                     </div>
                                                                                 </td>
                                                                                 <td>
                                                                                     <div class="g-2">
-                                                                                        <a href="{% url 'sales:order_update' pk=order.pk%}"
+                                                                                        <a href="{% url 'core:product_update' pk=product.pk%}"
                                                                                           class="btn text-primary btn-sm"
                                                                                             data-bs-toggle="tooltip"
                                                                                             data-bs-original-title="Tahrirlash"><span
                                                                                                 class="fe fe-edit fs-14"></span></a>
-                                                                                        <a href="{% url 'sales:order_delete' pk=order.pk%}"
+                                                                                        <a href="{% url 'core:product_delete' pk=product.pk%}"
                                                                                            class="btn text-danger btn-sm"
                                                                                             data-bs-toggle="tooltip"
                                                                                             data-bs-original-title="O'chirish"><span
@@ -115,7 +129,9 @@
                                                                             </tr>
                                                                              {% endfor %}
                                                                         </thead>
-                                                                       </tbody>
+                                                                        <tbody>
+
+                                                                        </tbody>
                                                                     </table>
                                                                 </div>
                                                             </div>

@@ -89,25 +89,6 @@ class Expenses(models.Model):
         return reverse('expense_detail', args=[str(self.id)])
 
 
-# class Transaction(models.Model):
-#     CURRENCY_TYPE_CHOICES = [
-#         ('USD', 'US Dollar'),
-#         ('UZS', 'Uzbekistan Sum'),
-#         ('RUB', 'Russian Ruble'),
-#     ]
-#     PAYMENT_CHOICE = [
-#         ("Naqd", "Naqd"),
-#         ("Pul o'tkazish", "Pul o'tkazish yo'li bilan")
-#     ]
-#     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-#     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='transactions')
-#     amount = models.DecimalField(max_digits=10, decimal_places=2)
-#     date = models.DateField()
-#     status = models.CharField(max_length=255)
-#     payment_method = models.CharField(max_length=14, choices=PAYMENT_CHOICE)
-#     currency_type = models.CharField(max_length=3, choices=CURRENCY_TYPE_CHOICES)
-#     created = models.DateTimeField(auto_now_add=True)
-#     updated = models.DateTimeField(auto_now=True)
 
 
 

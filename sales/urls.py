@@ -2,9 +2,6 @@ from django.urls import path
 from .views import CustomerCreateView, CustomerListView, CustomerUpdateView, CustomerDeleteView, homepage, \
     OrderCreateView, OrderUpdateView, OrderListView, OrderDeleteView
 
-
-
-
 app_name = "sales"
 
 urlpatterns = [
