@@ -41,16 +41,9 @@ class OrderForm(forms.ModelForm):
             'sana': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
             'buyurtma_holati': forms.Select(attrs={'class': 'form-control'}),
         }
-
-    def clean_buyurtma_miqdori(self):
-        buyurtma_miqdori = self.cleaned_data['buyurtma_miqdori']
-        if buyurtma_miqdori <= 0:
-            raise forms.ValidationError("Buyurtma miqdori noldan katta bo'lishi kerak.")
-        return buyurtma_miqdori
-
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper(self)
+        super(OrderForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
         self.helper.form_method = 'post'
 
         self.helper.layout = Layout(
@@ -73,10 +66,21 @@ class OrderForm(forms.ModelForm):
             Submit('submit', "Buyurtma qo'shish")
         )
 
+    def clean_buyurtma_miqdori(self):
+        buyurtma_miqdori = self.cleaned_data['buyurtma_miqdori']
+        if buyurtma_miqdori <= 0:
+            raise forms.ValidationError("Buyurtma miqdori noldan katta bo'lishi kerak.")
+        return buyurtma_miqdori
+
+
 class TransactionForm(forms.ModelForm):
     class Meta:
         model = Transaction
         fields = ['buyurtma', 'mijoz', 'summa', 'sana', 'holati', 'tulov_turi', 'valyuta_turi']
+        widgets = {
+            'sana': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
+            'buyurtma': forms.Select(attrs={'class': 'form-control'}),
+        }
 
     def __init__(self, *args, **kwargs):
         super(TransactionForm, self).__init__(*args, **kwargs)

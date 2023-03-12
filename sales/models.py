@@ -1,5 +1,7 @@
 from django.db import models
 from core.models import Product
+from django.utils.translation import gettext_lazy as _
+
 
 class Customer(models.Model):
     kompaniya_nomi = models.CharField(max_length=255, null=True, blank=True)
@@ -15,31 +17,31 @@ class Customer(models.Model):
 
 class Order(models.Model):
     ORDER_TYPE_CHOICES = [
-        ('dona', 'Chakana'),
-        ('ulgurji', 'Ulgurji'),
+        ('dona', _('Chakana')),
+        ('ulgurji', _('Ulgurji')),
     ]
     ORDER_STATUS_CHOICES = [
-        ('kutilyapti', 'Kutilyapti'),
-        ('tasdiqlandi', 'Tasdiqlandi'),
-        ('yetkazildi', 'Yetkazildi'),
-        ('bekor qilindi', 'Bekor qilindi'),
+        ('kutilyapti', _('Kutilyapti')),
+        ('tasdiqlandi', _('Tasdiqlandi')),
+        ('yetkazildi', _('Yetkazildi')),
+        ('bekor qilindi', _('Bekor qilindi')),
     ]
     CURRENCY_TYPE_CHOICES = [
-        ('USD', 'US Dollar'),
-        ('UZS', 'Uzbekistan Sum'),
-        ('RUB', 'Russian Ruble'),
+        ('USD', _('US Dollar')),
+        ('UZS', _('Uzbekistan Sum')),
+        ('RUB', _('Russian Ruble')),
     ]
-    tovar = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    tovar = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='orders')
     valyuta_turi = models.CharField(max_length=3, choices=CURRENCY_TYPE_CHOICES)
-    mijoz = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    mijoz = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='orders')
     sana = models.DateField()
     buyurtma_miqdori = models.PositiveIntegerField(default=0)
     buyurtma_turi = models.CharField(max_length=255, choices=ORDER_TYPE_CHOICES)
     buyurtma_holati = models.CharField(max_length=255, choices=ORDER_STATUS_CHOICES)
 
-
     def __str__(self):
-        return self.tovar
+        return str(self.tovar.nomi)
 
 
 class Transaction(models.Model):
