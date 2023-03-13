@@ -51,15 +51,21 @@ class OrderUpdateView(UpdateView):
 
 
 class OrderDeleteView(DeleteView):
-    model = Customer
+    model = Order
     template_name = 'sales/order_delete.html'
     success_url = reverse_lazy('sales:order_list')
 
 
 class OrderListView(ListView):
-    model = Customer
+    model = Order
     template_name = 'sales/order_list.html'
-    context_object_name = 'orders'
+    context_object_name = 'order_list'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['order_list'] = Order.objects.all()
+        return context
+
 
 class PaymentCreateView(CreateView):
     model = Transaction
@@ -76,12 +82,12 @@ class PaymentUpdateView(UpdateView):
 
 
 class PaymentDeleteView(DeleteView):
-    model = Customer
+    model = Transaction
     template_name = 'sales/payment_delete.html'
     success_url = reverse_lazy('sales:payment_list')
 
 
 class PaymentListView(ListView):
-    model = Customer
+    model = Transaction
     template_name = 'sales/payment_list.html'
     context_object_name = 'transactions'
