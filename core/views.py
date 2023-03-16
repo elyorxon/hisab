@@ -32,21 +32,28 @@ class ProductDeleteView(DeleteView):
     success_url = reverse_lazy('core:product_list')
 
 
+
 class ProductListView(ListView):
     model = Product
     template_name = 'core/product_list.html'
     context_object_name = 'products'
-    ITEMS_PER_PAGE = 10
+    paginate_by = 10  # number of products per page
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        object_list = context['object_list']
-        paginator = Paginator(object_list, self.paginate_by)
+        products = context['products']
+        paginator = Paginator(products, self.paginate_by)
         page = self.request.GET.get('page')
-        products = paginator.get_page(page)
+
+        try:
+            products = paginator.page(page)
+        except PageNotAnInteger:
+            products = paginator.page(1)
+        except EmptyPage:
+            products = paginator.page(paginator.num_pages)
+
         context['products'] = products
         return context
-
 
 class ExpenseCreateView(CreateView):
     model = Expenses
