@@ -80,3 +80,21 @@ class ExpenseListView(ListView):
     model = Expenses
     template_name = 'core/expense_list.html'
     context_object_name = 'expenses'
+
+    paginate_by = 10  # number of products per page
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        expenses = context['expenses']
+        paginator = Paginator(expenses, self.paginate_by)
+        page = self.request.GET.get('page')
+
+        try:
+            expenses = paginator.page(page)
+        except PageNotAnInteger:
+            expenses = paginator.page(1)
+        except EmptyPage:
+            expenses = paginator.page(paginator.num_pages)
+
+        context['expenses'] = expenses
+        return context
