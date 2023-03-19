@@ -123,6 +123,26 @@
 
                                                                         </tbody>
                                                                     </table>
+                                                                    {% if is_paginated %}
+                                                                              <nav class="pagination text-center mt-2">
+                                                                                <span class="page-links">
+                                                                                  {% if page_obj.has_previous %}
+                                                                                    <a href="?page=1">&laquo; birinchi</a>
+                                                                                    <a href="?page={{ page_obj.previous_page_number }}">&lsaquo; oldingi</a>
+                                                                                  {% endif %}
+
+                                                                                  <span class="page-current">
+                                                                                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                                                                  </span>
+
+                                                                                  {% if page_obj.has_next %}
+                                                                                    <a href="?page={{ page_obj.next_page_number }}">keyingi &rsaquo;</a>
+                                                                                    <a href="?page={{ page_obj.paginator.num_pages }}">so'ngi &raquo;</a>
+                                                                                  {% endif %}
+                                                                                </span>
+                                                                              </nav>
+                                                                   {% endif %}
+
                                                                 </div>
                                                             </div>
                                                         </div>

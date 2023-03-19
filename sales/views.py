@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import CustomerForm, OrderForm, TransactionForm
 from .models import Customer, Order, Transaction
 
@@ -34,6 +34,23 @@ class CustomerListView(ListView):
     model = Customer
     template_name = 'sales/customer_list.html'
     context_object_name = 'customers'
+    paginate_by = 10  # number of products per page
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        customers = context['customers']
+        paginator = Paginator(customers, self.paginate_by)
+        page = self.request.GET.get('customers')
+
+        try:
+            customers = paginator.page(page)
+        except PageNotAnInteger:
+            customers = paginator.page(1)
+        except EmptyPage:
+            customers = paginator.page(paginator.num_pages)
+
+        context['customers'] = customers
+        return context
 
 
 class OrderCreateView(CreateView):
@@ -60,11 +77,24 @@ class OrderListView(ListView):
     model = Order
     template_name = 'sales/order_list.html'
     context_object_name = 'order_list'
+    paginate_by = 10  # number of products per page
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['order_list'] = Order.objects.all()
+        order_list = context['order_list']
+        paginator = Paginator(order_list, self.paginate_by)
+        page = self.request.GET.get('page')
+
+        try:
+            order_list = paginator.page(page)
+        except PageNotAnInteger:
+            order_list = paginator.page(1)
+        except EmptyPage:
+            order_list = paginator.page(paginator.num_pages)
+
+        context['order_list'] = order_list
         return context
+
 
 
 class PaymentCreateView(CreateView):
@@ -91,3 +121,20 @@ class PaymentListView(ListView):
     model = Transaction
     template_name = 'sales/payment_list.html'
     context_object_name = 'transactions'
+    paginate_by = 10  # number of products per page
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        transactions = context['transactions']
+        paginator = Paginator(transactions, self.paginate_by)
+        page = self.request.GET.get('page')
+
+        try:
+            transactions = paginator.page(page)
+        except PageNotAnInteger:
+            transactions = paginator.page(1)
+        except EmptyPage:
+            transactions = paginator.page(paginator.num_pages)
+
+        context['transactions'] = transactions
+        return context
