@@ -1,8 +1,60 @@
 from django import forms
-from .models import Product, Expenses
+from .models import Product, Expenses, Kirim, Chiqim
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 
+
+class KirimForm(forms.ModelForm):
+
+    class Meta:
+        model = Kirim
+        fields = ['miqdori', 'sana']
+        widgets = {
+            'sana': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
+                  }
+
+    def __init__(self, *args, **kwargs):
+        super(KirimForm, self).__init__(*args, **kwargs)
+
+        # create a helper object
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+
+        # define form layout using crispy-forms layout objects
+        self.helper.layout = Layout(
+            Row(
+                Column('miqdori', css_class='form-group col-md-6 mb-0'),
+                Column('sana', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Submit('submit', "Kirim qilish")
+        )
+
+
+class ChiqimForm(forms.ModelForm):
+    class Meta:
+        model = Kirim
+        fields = ['miqdori', 'sana']
+        widgets = {
+            'sana': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
+                  }
+
+    def __init__(self, *args, **kwargs):
+        super(ChiqimForm, self).__init__(*args, **kwargs)
+
+        # create a helper object
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+
+        # define form layout using crispy-forms layout objects
+        self.helper.layout = Layout(
+            Row(
+                Column('miqdori', css_class='form-group col-md-6 mb-0'),
+                Column('sana', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Submit('submit', "Chiqim qilish")
+        )
 
 class ProductForm(forms.ModelForm):
     class Meta:

@@ -1,6 +1,16 @@
 from django.db import models
 from django.urls import reverse
 
+class Kirim(models.Model):
+    miqdori = models.PositiveIntegerField()
+    sana = models.DateField()
+
+class Chiqim(models.Model):
+    miqdori = models.ForeignKey(Kirim, on_delete=models.CASCADE)
+    sana = models.DateField()
+
+
+
 
 class Product(models.Model):
     UNIT_CHOICES = [
@@ -39,7 +49,6 @@ class Supplier(models.Model):
 
     def __str__(self):
         return self.nomi
-
 
 
 class Warehouse(models.Model):

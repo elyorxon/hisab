@@ -4,6 +4,19 @@ from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import CustomerForm, OrderForm, TransactionForm
 from .models import Customer, Order, Transaction
+from django_filters.views import FilterView
+from .filters import OrderFilter
+
+class OrderListFilterView(FilterView):
+    model = Order
+    template_name = 'sales/order_list.html'
+    filterset_class = OrderFilter
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = self.filterset_class(self.request.GET, queryset=self.get_queryset())
+        return context
 
 
 def homepage(request):
