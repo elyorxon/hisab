@@ -1,0 +1,18 @@
+{% extends "core/index.html" %}
+
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="card-body modal-center">
+    <h5>Kirimni o'chirish</h5>
+    <form method="post">
+        {% csrf_token %}
+        <p> <strong>{{ object.miqdori }} </strong> ni ro'yxatdan o'chirishni istaysizmi? </p>
+        <button type="submit" class="btn btn-danger">O'chirish<span class="fe fe-trash-2 fs-14"></span></button>
+        <a type="button" class="btn btn-success" href="{%url 'core:expense_list' %}">Bekor qilish
+        </a>
+    </form>
+</div>
+
+{% endblock %}
